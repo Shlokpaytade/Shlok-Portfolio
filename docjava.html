@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7-Day OOPs Java Learning Journey</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #f0f4f8;
+      padding: 2.5rem 1rem 4rem;
+      line-height: 1.6;
+      font-size: 1.125rem;
+      user-select: none;
+    }
+
+    #container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff1a;
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(20, 40, 70, 0.7);
+      padding: 3rem 3rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #e9f1fc;
+      text-shadow: 0 2px 10px #001f4dcc;
+      margin-bottom: 1rem;
+      user-select: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Tab Navigation */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #77aaff44;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 2px solid #77aaff88;
+      padding: 0.7rem 1.9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #d0e0ff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      user-select: none;
+      letter-spacing: 0.06em;
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: #3f7dde44;
+      border-color: #a4c0ffcc;
+      color: #aaddff;
+    }
+
+    .tab-btn.active {
+      background: #4a81e5aa;
+      color: #eef5ff;
+      border-color: #7fafee;
+      box-shadow: 0 0 10px #99bbfdaa;
+      cursor: default;
+    }
+
+    /* Sections */
+    section.content-section {
+      display: none;
+      animation: fadeInUp 0.4s ease forwards;
+      padding: 1rem 1rem 0;
+      user-select: text;
+    }
+
+    section.content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Headings */
+    section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #9ec1ff;
+      margin-bottom: 1.2rem;
+      border-left: 6px solid #4290ff;
+      padding-left: 0.8rem;
+      font-style: italic;
+      letter-spacing: 0.07em;
+      user-select: none;
+    }
+
+    /* Paragraph text */
+    section p {
+      font-size: 1.1rem;
+      color: #d0ddeeff;
+      margin-bottom: 2rem;
+      max-width: 85ch;
+      line-height: 1.65;
+      word-break: break-word;
+    }
+
+    /* Day block container */
+    .day-block {
+      background: #2b4a8a99;
+      border-radius: 18px;
+      padding: 2rem 2.5rem 2.5rem;
+      box-shadow: inset 0 0 25px rgba(54, 107, 228, 0.4);
+      border: 2px solid #4477ffaa;
+      transition: box-shadow 0.35s ease;
+    }
+
+    .day-block:hover {
+      box-shadow: inset 0 0 45px rgba(66, 144, 255, 0.7);
+    }
+
+    .day-block h3 {
+      font-size: 1.7rem;
+      color: #bbe1ff;
+      margin-bottom: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.07em;
+      user-select: none;
+    }
+
+    /* Lists */
+    .content-list {
+      color: #b3ceffcc;
+      margin-left: 1.4rem;
+      margin-bottom: 2.2rem;
+      list-style-type: disc;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 90ch;
+    }
+
+    .content-list ul {
+      margin-left: 2rem;
+      margin-top: 0.8rem;
+      list-style-type: circle;
+    }
+
+    /* Code block styling */
+    .code-block {
+      background: #152238;
+      color: #a0c4ff;
+      border-radius: 18px;
+      padding: 1.75rem 2rem;
+      font-family: 'Source Code Pro', monospace, Consolas, monospace;
+      font-size: 1rem;
+      max-height: 300px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      border: 3px solid #4a81e5cc;
+      box-shadow: 0 8px 34px #2a4aa7cc;
+      letter-spacing: 0.015em;
+      line-height: 1.32;
+      user-select: text;
+      margin-bottom: 2.5rem;
+    }
+
+    .code-block::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .code-block::-webkit-scrollbar-thumb {
+      background: #517adfbb;
+      border-radius: 12px;
+    }
+
+    .code-block::-webkit-scrollbar-track {
+      background: #13254b;
+      border-radius: 12px;
+    }
+
+    /* Images section */
+    .images-section {
+      background: #223d7a99;
+      border-radius: 20px;
+      border: 3px solid #4a81e5bb;
+      box-shadow: inset 0 0 25px rgba(66, 144, 255, 0.5);
+      padding: 1rem;
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.35s ease;
+    }
+
+    .images-section:hover {
+      background: #1b335fcc;
+    }
+
+    .images-section img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 14px;
+      pointer-events: none;
+      user-select: none;
+      transition: transform 0.35s ease;
+      filter: drop-shadow(0 0 4px rgba(66, 144, 255, 0.85));
+    }
+
+    .images-section.empty::before {
+      content: attr(data-placeholder);
+      font-style: italic;
+      color: #a4c9ffaa;
+      user-select: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      pointer-events: none;
+    }
+
+    /* Output section */
+    .output-block {
+      background: #1f2d4acc;
+      border-radius: 14px;
+      border: 2px solid #316edb;
+      box-shadow: inset 0 0 18px #2a59c7cc;
+      padding: 1rem 1.5rem;
+      color: #cee4fccc;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.03rem;
+      min-height: 80px;
+      white-space: pre-line;
+      margin-bottom: 3rem;
+      overflow-y: auto;
+      max-height: 150px;
+      user-select: text;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 600px;
+      margin: 4rem auto 1.8rem;
+      padding: 1.5rem 2rem;
+      background: #162d6dcc;
+      color: #9bb9ffdd;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-align: center;
+      border-radius: 16px;
+      user-select: none;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 6px 20px rgba(23, 47, 114, 0.65);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #container {
+        padding: 2rem 2rem 3rem;
+      }
+
+      .day-block {
+        padding: 1.6rem 1.8rem 2.2rem;
+      }
+
+      .content-list {
+        margin-left: 1rem;
+        max-width: 100%;
+      }
+
+      .code-block {
+        max-height: 260px;
+        font-size: 0.95rem;
+      }
+
+      .images-section {
+        min-height: 160px;
+      }
+
+      .tab-btn {
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 0.65rem 1.6rem;
+      }
+
+      h1 {
+        font-size: 2.7rem;
+      }
+
+      section h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <h1>7-Day OOPs Java Learning Journey</h1>
+
+    <nav class="tabs" role="tablist" aria-label="Jump to day"></nav>
+  </div>
+
+  <footer>
+    DIGITAL FABRICATION - MADE BY SHLOK PAYTADE 2024-25
+  </footer>
+
+  <script>
+    const learningDays = [
+      {
+        title: "Day 1 – Programming Fundamentals",
+        overview: [
+          "Learned variables, operators, loops, and conditionals.",
+          "Practiced writing functions and simple problem-solving (factorial, prime, Fibonacci)."
+        ],
+        code: `// Day1Basics.java
+public class Day1Basics {
+    static int factorial(int n) {
+        int result = 1;
+        for (int i = 2; i <= n; i++) result *= i;
+        return result;
+    }
+
+    static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i * i <= n; i++) if (n % i == 0) return false;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int a = 10, b = 3;
+        System.out.println("a + b = " + (a + b));
+        System.out.println("Factorial of 5 = " + factorial(5));
+        System.out.println("Is 13 prime? " + isPrime(13));
+    }
+}`,
+        output: `a + b = 13
+Factorial of 5 = 120
+Is 13 prime? true`,
+        image: `https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 2 – Functions & Recursion",
+        overview: [
+          "Explored modular programming with functions.",
+          "Implemented recursion for factorial and Fibonacci."
+        ],
+        code: `// Day2Functions.java
+public class Day2Functions {
+    static int factorialRec(int n) {
+        if (n <= 1) return 1;
+        return n * factorialRec(n - 1);
+    }
+
+    static int fibRec(int n) {
+        if (n <= 1) return n;
+        return fibRec(n - 1) + fibRec(n - 2);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Factorial(5) = " + factorialRec(5));
+        System.out.println("Fibonacci(6) = " + fibRec(6));
+    }
+}`,
+        output: `Factorial(5) = 120
+Fibonacci(6) = 8`,
+        image: `https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 3 – Classes & Objects",
+        overview: [
+          "Learned about classes, objects, constructors, and methods.",
+          "Implemented a Car class with attributes and methods."
+        ],
+        code: `// Car.java
+class Car {
+    String brand, model;
+    int year, mileage;
+
+    Car(String brand, String model, int year, int mileage) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.mileage = mileage;
+    }
+
+    void drive(int km) {
+        mileage += km;
+        System.out.println("Driven " + km + " km. Mileage: " + mileage);
+    }
+
+    void display() {
+        System.out.println(brand + " " + model + " (" + year + ") - " + mileage + " km");
+    }
+}
+
+public class Day3CarDemo {
+    public static void main(String[] args) {
+        Car c1 = new Car("Toyota", "Yaris", 2020, 0);
+        c1.display();
+        c1.drive(120);
+    }
+}`,
+        output: `Toyota Yaris (2020) - 0 km
+Driven 120 km. Mileage: 120`,
+        image: `https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 4 – Encapsulation & Abstraction",
+        overview: [
+          "Studied access modifiers (private, public).",
+          "Used getters & setters for data hiding."
+        ],
+        code: `// BankAccount.java
+class BankAccount {
+    private String accountNumber;
+    private String owner;
+    private double balance;
+
+    BankAccount(String accountNumber, String owner, double balance) {
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.balance = balance;
+    }
+
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) balance -= amount;
+        else System.out.println("Insufficient funds!");
+    }
+
+    public void display() {
+        System.out.println("Account: " + accountNumber + ", Owner: " + owner + ", Balance: " + balance);
+    }
+}
+
+public class Day4BankDemo {
+    public static void main(String[] args) {
+        BankAccount acct = new BankAccount("AC123", "Shlok", 500);
+        acct.display();
+        acct.deposit(250);
+        acct.withdraw(200);
+        acct.display();
+    }
+}`,
+        output: `Account: AC123, Owner: Shlok, Balance: 500.0
+Account: AC123, Owner: Shlok, Balance: 550.0`,
+        image: `https://images.unsplash.com/photo-1565372912505-76bfebc23170?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 5 – Inheritance",
+        overview: [
+          "Learned code reusability through inheritance.",
+          "Implemented a Person class and extended it with Student."
+        ],
+        code: `// Person.java
+class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+class Student extends Person {
+    String rollNo, course;
+
+    Student(String name, int age, String rollNo, String course) {
+        super(name, age);
+        this.rollNo = rollNo;
+        this.course = course;
+    }
+
+    @Override
+    void display() {
+        super.display();
+        System.out.println("Roll No: " + rollNo + ", Course: " + course);
+    }
+}
+
+public class Day5InheritanceDemo {
+    public static void main(String[] args) {
+        Student s = new Student("Shlok", 20, "MECH58", "B.E. MECH");
+        s.display();
+    }
+}`,
+        output: `Name: Shlok, Age: 20
+Roll No: MECH58, Course: B.E. MECH`,
+        image: `https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 6 – Polymorphism",
+        overview: [
+          "Learned method overriding and runtime polymorphism using abstract classes."
+        ],
+        code: `// Shape.java
+abstract class Shape {
+    abstract double area();
+}
+
+class Circle extends Shape {
+    double radius;
+    Circle(double radius) { this.radius = radius; }
+
+    @Override
+    double area() { return Math.PI * radius * radius; }
+}
+
+class Rectangle extends Shape {
+    double w, h;
+    Rectangle(double w, double h) { this.w = w; this.h = h; }
+
+    @Override
+    double area() { return w * h; }
+}
+
+public class Day6PolymorphismDemo {
+    public static void main(String[] args) {
+        Shape s1 = new Circle(5);
+        Shape s2 = new Rectangle(4, 6);
+
+        System.out.println("Circle area = " + s1.area());
+        System.out.println("Rectangle area = " + s2.area());
+    }
+}`,
+        output: `Circle area = 78.53981633974483
+Rectangle area = 24.0`,
+        image: `https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80`
+      },
+      {
+        title: "Day 7 – Mini Project (Library Management System)",
+        overview: [
+          "Applied Encapsulation, Inheritance, and Polymorphism.",
+          "Designed a Library system with Book, Member, and Library classes."
+        ],
+        code: `// Book.java
+class Book {
+    String title, author, isbn;
+
+    Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
+    void display() {
+        System.out.println("Book: " + title + " by " + author + " [ISBN: " + isbn + "]");
+    }
+}
+
+class Member {
+    String name;
+    int memberId;
+
+    Member(String name, int memberId) {
+        this.name = name;
+        this.memberId = memberId;
+    }
+
+    void display() {
+        System.out.println("Member: " + name + " (ID: " + memberId + ")");
+    }
+}
+
+class Library {
+    Book[] books;
+    int count;
+
+    Library(int size) {
+        books = new Book[size];
+        count = 0;
+    }
+
+    void addBook(Book b) {
+        if (count < books.length) {
+            books[count++] = b;
+            System.out.println("Book added: " + b.title);
+        } else {
+            System.out.println("Library is full!");
+        }
+    }
+
+    void showBooks() {
+        System.out.println("--- Library Books ---");
+        for (int i = 0; i < count; i++) books[i].display();
+    }
+}
+
+public class Day7LibraryDemo {
+    public static void main(String[] args) {
+        Library lib = new Library(5);
+        Book b1 = new Book("OOP in Java", "James Gosling", "111");
+        Book b2 = new Book("Clean Code", "Robert Martin", "222");
+        Member m1 = new Member("Shlok", 58);
+
+        lib.addBook(b1);
+        lib.addBook(b2);
+
+        m1.display();
+        lib.showBooks();
+    }
+}`,
+        output: `Book added: OOP in Java
+Book added: Clean Code
+Member: Shlok (ID: 58)
+--- Library Books ---
+Book: OOP in Java by James Gosling [ISBN: 111]
+Book: Clean Code by Robert Martin [ISBN: 222]`,
+        image: `https://images.unsplash.com/photo-1560184897-cd8a5273c2c4?auto=format&fit=crop&w=600&q=80`
+      }
+    ];
+
+    const container = document.getElementById('container');
+
+    const tabsContainer = document.createElement('nav');
+    tabsContainer.className = 'tabs';
+    tabsContainer.setAttribute('role', 'tablist');
+    tabsContainer.setAttribute('aria-label', 'Jump to day');
+    container.insertBefore(tabsContainer, container.children[1]);
+
+    learningDays.forEach((day, i) => {
+      // Tabs
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn';
+      btn.type = 'button';
+      btn.textContent = `Day ${i + 1}`;
+      btn.title = day.title;
+      btn.id = `tab-${i}`;
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-controls', `section-${i}`);
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      if (i === 0) btn.classList.add('active');
+      tabsContainer.appendChild(btn);
+
+      // Sections
+      const section = document.createElement('section');
+      section.className = 'content-section';
+      section.id = `section-${i}`;
+      section.setAttribute('role', 'tabpanel');
+      section.setAttribute('aria-labelledby', `tab-${i}`);
+      section.tabIndex = i === 0 ? 0 : -1;
+      if (i === 0) section.classList.add('active');
+
+      const h2 = document.createElement('h2');
+      h2.textContent = day.title;
+      section.appendChild(h2);
+
+      day.overview.forEach(text => {
+        const p = document.createElement('p');
+        p.textContent = text;
+        section.appendChild(p);
+      });
+
+      // Image section
+      const imgSection = document.createElement('div');
+      imgSection.className = 'images-section';
+      if (day.image) {
+        const img = document.createElement('img');
+        img.src = day.image;
+        img.alt = `Image for ${day.title}`;
+        imgSection.appendChild(img);
+      } else {
+        imgSection.classList.add('empty');
+        imgSection.setAttribute('data-placeholder', 'Add an image or illustration here');
+      }
+      section.appendChild(imgSection);
+
+      // Code block
+      const pre = document.createElement('pre');
+      pre.className = 'code-block';
+      pre.textContent = day.code;
+      section.appendChild(pre);
+
+      // Output block
+      const outputBlock = document.createElement('div');
+      outputBlock.className = 'output-block';
+      outputBlock.textContent = day.output || 'Output will appear here after running the code.';
+      section.appendChild(outputBlock);
+
+      container.appendChild(section);
+    });
+
+    // Tab switching logic
+    tabsContainer.addEventListener('click', e => {
+      if (!e.target.classList.contains('tab-btn')) return;
+      const idx = [...tabsContainer.children].indexOf(e.target);
+      if (idx === -1) return;
+      [...tabsContainer.children].forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+        btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+      const sections = container.querySelectorAll('.content-section');
+      sections.forEach((sec, i) => {
+        const active = i === idx;
+        sec.classList.toggle('active', active);
+        sec.tabIndex = active ? 0 : -1;
+        if (active) sec.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+
+</html>
